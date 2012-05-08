@@ -11,6 +11,7 @@
   <name>Parent Project</name>
  
   <modules>
+  	<module>checkstyle</module>
     <module>reference-implementation</module>
   </modules>
 
