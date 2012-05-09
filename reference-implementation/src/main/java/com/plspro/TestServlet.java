@@ -20,7 +20,7 @@ public class TestServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// add comment to test hooks
-		response.getWriter().print(String.format("<h1>%s</h1>", bean.greet()));		
+		response.getWriter().print(String.format("<h1>Modified version: %s</h1>", bean.greet()));		
 	}
 
 }
