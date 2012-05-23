@@ -19,7 +19,7 @@ public class TestServlet extends HttpServlet {
 	private TestEJB bean;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().print(String.format("<h1>Master branch: %s</h1>", bean.greet()));		
+		response.getWriter().print(String.format("<h1>Master branch v2: %s</h1>", bean.greet()));		
 	}
 
 }
