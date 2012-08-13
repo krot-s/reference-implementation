@@ -12,7 +12,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -43,6 +43,7 @@
 				<version>7.1.1.Final</version>
 				<configuration>
 					<ignoreMissingDeployment>true</ignoreMissingDeployment>
+					<goalPrefix>jb</goalPrefix>
 				</configuration>
 			</plugin>
 		</plugins>
