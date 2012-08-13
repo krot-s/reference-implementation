@@ -12,7 +12,11 @@ import javax.enterprise.context.SessionScoped;
  */
 @SessionScoped
 public class TestEJB implements Serializable {
-
+	/**
+	 * Test method.
+	 * 
+	 * @return void
+	 */
 	public String greet() {
 		return "Hello from EJB!";
 	}
