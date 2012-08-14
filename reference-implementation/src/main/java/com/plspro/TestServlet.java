@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.LoggerFactory;
+
 import com.plspro.service.TestEJB;
 
 /**
@@ -29,7 +31,7 @@ public class TestServlet extends HttpServlet {
 	 */
 	@Inject
 	private TestEJB bean;
-
+ 
 	
 	/**
 	 * Test method.
@@ -40,8 +42,9 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doGet(final HttpServletRequest request, final HttpServletResponse response) 
 	throws ServletException, IOException {
-		response.getWriter().print(
-				String.format("<h1>Master branch v7: %s</h1>", bean.greet()));		
+		LoggerFactory.getLogger(TestServlet.class).debug("asdfasdfas df");
+		
+		response.getWriter().print("<h1>Users count: " + bean.searchUsers().size());		
 	}
 
 }
