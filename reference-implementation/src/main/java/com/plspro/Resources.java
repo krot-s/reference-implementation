@@ -25,9 +25,6 @@ import javax.persistence.PersistenceContext;
  * context, to CDI beans.
  */
 public class Resources {
-	/**
-	 * Entity manager.
-	 */
 	@Produces
 	@PersistenceContext(unitName = "plspro")
 	private EntityManager em;

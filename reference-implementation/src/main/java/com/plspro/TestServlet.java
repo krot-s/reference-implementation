@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.LoggerFactory;
-
 import com.plspro.service.TestEJB;
 
 /**
@@ -21,14 +19,8 @@ import com.plspro.service.TestEJB;
  */
 @WebServlet("/TestServlet")
 public class TestServlet extends HttpServlet {
-	/**
-	 * dummy.
-	 */
 	private static final long serialVersionUID = 1L;
-		
-	/**
-	 * test service.
-	 */
+	
 	@Inject
 	private TestEJB bean;
  
@@ -42,9 +34,6 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doGet(final HttpServletRequest request, final HttpServletResponse response) 
 	throws ServletException, IOException {
-		LoggerFactory.getLogger(TestServlet.class).debug("asdfasdfas df");
-		
-		response.getWriter().print("<h1>Users count: " + bean.searchUsers().size());		
+		response.getWriter().print("<h1>Users count: " + bean.searchUsers("RENDZEL@DMV.COM").size());		
 	}
-
 }

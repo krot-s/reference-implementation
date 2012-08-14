@@ -32,18 +32,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 	name = "User.searchByUserId")
 @SequenceGenerator(name = "USERS_SEQ", sequenceName = "USR_SEQ")
 public class User implements Serializable {
-	/**
-	 * Dummy. 
-	 */
-	private static final int MAX_USERNAME_LENGTH = 25;
-	/**
-	 * Dummy. 
-	 */
 	private static final long serialVersionUID = -2092570781115897267L;
 
-	/**
-	 * Dummy. 
-	 */
+	private static final int MAX_USERNAME_LENGTH = 25;
+
 	@NotNull
 	@NotEmpty
 	@Size(min = 1, max = MAX_USERNAME_LENGTH, message = "1-25 letters and spaces")
@@ -51,9 +43,6 @@ public class User implements Serializable {
 	@Column(name = "first_name")
 	private String firstName;
 
-	/**
-	 * Dummy. 
-	 */
 	@NotNull
 	@NotEmpty
 	@Size(min = 1, max = MAX_USERNAME_LENGTH, message = "1-25 letters and spaces")
@@ -61,61 +50,34 @@ public class User implements Serializable {
 	@Column(name = "last_name")
 	private String lastName;
 
-	/**
-	 * Dummy. 
-	 */
 	private String userId;
 
-	/**
-	 * Dummy. 
-	 */
 	@NotNull
 	@NotEmpty
 	@Size(min = 1, max = MAX_USERNAME_LENGTH, message = "1-25 letters and spaces")
 	@Pattern(regexp = "[A-Za-z0-9]*", message = "Only letters and digits")
 	private String password;
 
-	/**
-	 * Dummy. 
-	 */
 	@NotNull
 	@NotEmpty
 	@Email(message = "Invalid format")
 	@Column(name = "email_address")
 	private String emailAddress;
 
-	/**
-	 * Dummy. 
-	 */
 	private String status = "A";
 
-	/**
-	 * Dummy. 
-	 */
 	@Column(name = "date_created")
 	private Date dateCreated = new Date();
 
-	/**
-	 * Dummy. 
-	 */
 	@Column(name = "date_modified")
 	private Date dateModified = new Date();
 
-	/**
-	 * Dummy. 
-	 */
 	@Column(name = "created_By")
 	private Long createdBy = 0L;
 
-	/**
-	 * Dummy. 
-	 */
 	@Column(name = "modified_by")
 	private Long modifiedBy = 0L;
 
-	/**
-	 * Dummy. 
-	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_SEQ")
 	@Column(name = "person_id")

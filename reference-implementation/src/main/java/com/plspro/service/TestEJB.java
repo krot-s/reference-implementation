@@ -1,13 +1,13 @@
 package com.plspro.service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import com.plspro.PersistanceUtils;
 import com.plspro.domain.User;
 
 /**
@@ -16,36 +16,33 @@ import com.plspro.domain.User;
  * @author User
  * 
  */
-@SessionScoped
+@Stateless
 public class TestEJB implements Serializable {
-	/**
-	 * Dummy.
-	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Em.
-	 */
 	@Inject
 	private EntityManager em;
 
 	/**
-	 * Test method.
+	 * Save user.
 	 * 
-	 * @return void
+	 * @param user 
 	 */
-	public String greet() {
-		return "Hello from EJB!";
+	public void save(User user) {
+		em.persist(user);
 	}
 
 	/**
-	 * Search users by id.
+	 * Search users by userId.
+	 * 
+	 * @param userId 
 	 * 
 	 * @return users.
 	 */
-	public List<User> searchUsers() {
-		return em.createNamedQuery("User.searchByUserId", User.class)
-				.setHint("org.hibernate.cacheable", true) 
-				.setParameter("userId", "RENDZEL@DMV.COM").getResultList();
+	public List<User> searchUsers(String userId) {
+		return  PersistanceUtils.cacheQuery(
+			em.createNamedQuery("User.searchByUserId", User.class)
+			.setParameter("userId", userId)
+		).getResultList();	
 	}
 }
