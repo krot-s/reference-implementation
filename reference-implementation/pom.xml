@@ -2,15 +2,43 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.plspro</groupId>
+	<groupId>com.pls</groupId>
 	<artifactId>reference-implementation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-
 	<name>reference-implementation</name>
+	
+	<repositories>
+		<repository>
+			<id>vaadin-addons</id>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+		<repository>
+			<id>jboss</id>
+			<url>http://repository.jboss.org/maven2</url>
+		</repository>
+	</repositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<!-- dependancies for jee part -->
+		<checkstyle.version>2.9.1</checkstyle.version>
+		<jboss-deployer.version>7.1.1.Final</jboss-deployer.version>
+		<servlet-api.version>3.0.1</servlet-api.version>
+		<cdi-api.version>1.1.EDR1.2</cdi-api.version>
+		<jboss-ejb-api.version>1.0.2.Final</jboss-ejb-api.version>
+		<jpa-api.version>1.0.1.Final</jpa-api.version>
+		
+		<!-- dependancies for vaadin -->
+		<guava.version>13.0</guava.version>
+		<vaadin.version>6.8.1</vaadin.version>
+		<junit.version>4.8.1</junit.version>
+		<sisu-guice.version>3.1.2</sisu-guice.version>
+		<hibernate-validator.version>4.3.0.Final</hibernate-validator.version>
+		<beanvalidation-addon.version>1.0.0</beanvalidation-addon.version>
+		<messagebox-addon.version>1.1.1</messagebox-addon.version>
+		<tableexport-addon.version>1.3.0</tableexport-addon.version>
 	</properties>
 
 	<build>
@@ -26,7 +54,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.9.1</version>
+				<version>${checkstyle.version}</version>
 				<configuration>
 					<configLocation>${basedir}/../checkstyle/src/main/resources/checkstyle.xml</configLocation>
 					<consoleOutput>true</consoleOutput>
@@ -36,14 +64,13 @@
 				<!-- uncomment if you want to enable checks on each compile and fail 
 					build if some violations are present <executions> <execution> <id>compile-check</id> 
 					<goals> <goal>check</goal> </goals> <phase>compile</phase> </execution> </executions> -->
-			</plugin>
+			</plugin>			
 			<plugin>
 				<groupId>org.jboss.as.plugins</groupId>
 				<artifactId>jboss-as-maven-plugin</artifactId>
-				<version>7.1.1.Final</version>
+				<version>${jboss-deployer.version}</version>
 				<configuration>
 					<ignoreMissingDeployment>true</ignoreMissingDeployment>
-					<goalPrefix>jb</goalPrefix>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -53,52 +80,33 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<version>${servlet-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
-			<version>1.1.EDR1.2</version>
+			<version>${cdi-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.ejb</groupId>
 			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
-			<version>1.0.2.Final</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
-		</dependency>
-
-		<!-- Import the Common Annotations API (JSR-250), we use provided scope 
-			as the API is included in JBoss -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.annotation</groupId>
-			<artifactId>jboss-annotations-api_1.1_spec</artifactId>
-			<version>1.0.1.Final</version>
+			<version>${jboss-ejb-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the JPA API, we use provided scope as the API is included in 
-			JBoss -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>1.0.1.Final</version>
+			<version>${jpa-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- JSR-303 (Bean Validation) Implementation -->
-		<!-- Provides portable constraints such as @Email -->
-		<!-- Hibernate Validator is shipped in JBoss -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
+			<version>${hibernate-validator.version}</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -109,11 +117,85 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.1</version>
-			<scope>provided</scope>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+		
+		<!-- vaadin dependencies start -->
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin</artifactId>
+			<version>${vaadin.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
+		<!-- patched versions of guice (see https://github.com/sonatype/sisu-guice) -->
+		<dependency>
+			<groupId>org.sonatype.sisu</groupId>
+			<artifactId>sisu-guice</artifactId>
+			<version>${sisu-guice.version}</version>
+
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.sonatype.sisu.inject</groupId>
+			<artifactId>guice-servlet</artifactId>
+			<version>${sisu-guice.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin.addon</groupId>
+			<artifactId>beanvalidation-addon</artifactId>
+			<version>${beanvalidation-addon.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>messagebox</artifactId>
+			<version>${messagebox-addon.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>tableexport</artifactId>
+			<version>${tableexport-addon.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<!-- not used, but required due to jboss classloader bug -->		
+		<dependency>
+          	<groupId>com.google.gwt</groupId>
+          	<artifactId>gwt-user</artifactId>
+          	<version>2.3.0</version>
+        </dependency>
+        
+        <!-- vaadin dependencies end -->
+		
 	</dependencies>
 </project>

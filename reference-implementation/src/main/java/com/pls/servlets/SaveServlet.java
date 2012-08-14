@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pls.domain.User;
+import com.pls.service.UserService;
 import com.pls.service.UserServiceImpl;
 
 /**
@@ -23,7 +24,7 @@ public class SaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private UserServiceImpl service;
+	private UserService service;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -55,7 +56,7 @@ public class SaveServlet extends HttpServlet {
 		user.setPassword("vasya");
 		user.setUserId(UUID.randomUUID().toString());
 		user.setStatus("A");
-		service.save(user);
+		service.addUser(user);
 		
 		response.getWriter().print("<h1>User created</h1>");
 	}

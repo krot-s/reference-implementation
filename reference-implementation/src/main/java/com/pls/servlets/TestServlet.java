@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pls.service.UserService;
 import com.pls.service.UserServiceImpl;
 
 /**
@@ -22,7 +23,7 @@ public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private UserServiceImpl bean;
+	private UserService bean;
  
 	
 	/**
@@ -34,6 +35,6 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doGet(final HttpServletRequest request, final HttpServletResponse response) 
 	throws ServletException, IOException {
-		response.getWriter().print("<h1>Users count: " + bean.searchUsers("RENDZEL@DMV.COM").size());		
+		response.getWriter().print("<h1>Users count: " + bean.search("RENDZEL@DMV.COM").size());		
 	}
 }
