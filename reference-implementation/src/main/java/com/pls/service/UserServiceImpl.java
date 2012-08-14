@@ -1,4 +1,4 @@
-package com.plspro.service;
+package com.pls.service;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,18 +7,19 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import com.plspro.PersistanceUtils;
-import com.plspro.domain.User;
+import com.pls.domain.User;
+import com.pls.persistance.PersistanceUtils;
 
 /**
- * Test EJB.
+ * Test user service.
  * 
  * @author User
  * 
  */
 @Stateless
-public class TestEJB implements Serializable {
+public class UserServiceImpl implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final int MAX_RESULTS_PER_PAGE = 10;
 
 	@Inject
 	private EntityManager em;
@@ -43,6 +44,7 @@ public class TestEJB implements Serializable {
 		return  PersistanceUtils.cacheQuery(
 			em.createNamedQuery("User.searchByUserId", User.class)
 			.setParameter("userId", userId)
-		).getResultList();	
+		).setMaxResults(MAX_RESULTS_PER_PAGE)
+		.getResultList();	
 	}
 }

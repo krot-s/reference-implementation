@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.plspro;
+package com.pls;
 
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;

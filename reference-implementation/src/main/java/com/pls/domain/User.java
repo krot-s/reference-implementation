@@ -1,4 +1,4 @@
-package com.plspro.domain;
+package com.pls.domain;
 
 import java.io.Serializable;
 import java.util.Date;

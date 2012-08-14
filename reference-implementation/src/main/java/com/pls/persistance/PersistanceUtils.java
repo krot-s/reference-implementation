@@ -1,4 +1,4 @@
-package com.plspro;
+package com.pls.persistance;
 
 import javax.persistence.TypedQuery;
 

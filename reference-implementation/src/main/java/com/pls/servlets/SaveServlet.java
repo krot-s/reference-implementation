@@ -1,4 +1,4 @@
-package com.plspro;
+package com.pls.servlets;
 
 import java.io.IOException;
 import java.util.Date;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.plspro.domain.User;
-import com.plspro.service.TestEJB;
+import com.pls.domain.User;
+import com.pls.service.UserServiceImpl;
 
 /**
  * Servlet implementation class SaveServlet.
@@ -23,7 +23,7 @@ public class SaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private TestEJB service;
+	private UserServiceImpl service;
        
     /**
      * @see HttpServlet#HttpServlet()
