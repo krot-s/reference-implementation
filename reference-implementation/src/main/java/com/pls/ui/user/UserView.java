@@ -78,6 +78,7 @@ public class UserView implements Serializable {
 		form.setImmediate(false);
 		form.setCaption("Create new User");
 		setDataSource(form);
+		form.removeItemProperty("personId");
 		Button addButton = new Button("Create");
 		addButton.addListener(new Button.ClickListener() {
 			@Override
@@ -117,7 +118,8 @@ public class UserView implements Serializable {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				beans.removeAllItems();
-				beans.addAll(service.search(searchField.getValue().toString()));
+				beans.addAll(service.search(
+						searchField.getValue().toString().replaceAll("\\*", "%")));
 			}
 		});
 

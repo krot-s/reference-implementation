@@ -50,6 +50,8 @@ public class User implements Serializable {
 	@Column(name = "last_name")
 	private String lastName;
 
+	@NotNull
+	@NotEmpty
 	private String userId;
 
 	@NotNull

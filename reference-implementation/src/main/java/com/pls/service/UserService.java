@@ -14,7 +14,7 @@ public interface UserService {
 	 * @param id 
 	 * @return user.
 	 */
-	User getById(User id);
+	User getById(long id);
 
 	/**
 	 * Get all.
