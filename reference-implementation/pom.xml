@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>reference-implementation</name>
-	
+
 	<repositories>
 		<repository>
 			<id>vaadin-addons</id>
@@ -21,7 +21,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
+
 		<!-- dependancies for jee part -->
 		<checkstyle.version>2.9.1</checkstyle.version>
 		<jboss-deployer.version>7.1.1.Final</jboss-deployer.version>
@@ -29,7 +29,7 @@
 		<cdi-api.version>1.1.EDR1.2</cdi-api.version>
 		<jboss-ejb-api.version>1.0.2.Final</jboss-ejb-api.version>
 		<jpa-api.version>1.0.1.Final</jpa-api.version>
-		
+
 		<!-- dependancies for vaadin -->
 		<guava.version>13.0</guava.version>
 		<vaadin.version>6.8.1</vaadin.version>
@@ -66,7 +66,7 @@
 				<!-- uncomment if you want to enable checks on each compile and fail 
 					build if some violations are present <executions> <execution> <id>compile-check</id> 
 					<goals> <goal>check</goal> </goals> <phase>compile</phase> </execution> </executions> -->
-			</plugin>			
+			</plugin>
 			<plugin>
 				<groupId>org.jboss.as.plugins</groupId>
 				<artifactId>jboss-as-maven-plugin</artifactId>
@@ -74,6 +74,25 @@
 				<configuration>
 					<ignoreMissingDeployment>true</ignoreMissingDeployment>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.1.1</version>
+				<executions>
+					<execution>
+						<id>enforce</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<DependencyConvergence/>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -123,7 +142,7 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 		</dependency>
-		
+
 		<!-- vaadin dependencies start -->
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -160,6 +179,12 @@
 			<groupId>com.vaadin.addon</groupId>
 			<artifactId>beanvalidation-addon</artifactId>
 			<version>${beanvalidation-addon.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -190,14 +215,14 @@
 			<version>${commons-io.version}</version>
 		</dependency>
 
-		<!-- not used, but required due to jboss classloader bug -->		
+		<!-- not used, but required due to jboss classloader bug -->
 		<dependency>
-          	<groupId>com.google.gwt</groupId>
-          	<artifactId>gwt-user</artifactId>
-          	<version>2.3.0</version>
-        </dependency>
-        
-        <!-- vaadin dependencies end -->
-		
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+		<!-- vaadin dependencies end -->
+
 	</dependencies>
 </project>
