@@ -4,11 +4,29 @@ import java.util.List;
 
 import com.pls.domain.Customer;
 
+/**
+ * Customers service.
+ * @author User
+ *
+ */
 public interface CustomerService {
-	public Customer getById(Long id);
+	/**
+	 * Get by id.
+	 * @param id 
+	 * @return customer.
+	 */
+	Customer getById(Long id);
 	
-	public List<Customer> getAllCustomers();
+	/**
+	 * Get all.
+	 * @return all customers.
+	 */
+	List<Customer> getAllCustomers();
 	
-	public void addCustomer(Customer customer);
+	/**
+	 * Save new.
+	 * @param customer 
+	 */
+	void addCustomer(Customer customer);
 	
 }

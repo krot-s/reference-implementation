@@ -4,10 +4,28 @@ import java.util.List;
 
 import com.pls.domain.Carrier;
 
+/**
+ * Carriers service.
+ * @author User
+ *
+ */
 public interface CarrierService {
-	public Carrier getById(Long id);
+	/**
+	 * Get by id.
+	 * @param id 
+	 * @return carrier.
+	 */
+	Carrier getById(Long id);
 	
-	public List<Carrier> getAllCarriers();
+	/**
+	 * Get all.
+	 * @return all carriers.
+	 */
+	List<Carrier> getAllCarriers();
 	
-	public void addCarrier(Carrier carrier);
+	/**
+	 * Save new.
+	 * @param carrier 
+	 */
+	void addCarrier(Carrier carrier);
 }

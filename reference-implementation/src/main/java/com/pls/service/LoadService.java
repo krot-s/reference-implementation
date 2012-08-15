@@ -4,11 +4,29 @@ import java.util.List;
 
 import com.pls.domain.Load;
 
+/**
+ * Load service.
+ * 
+ * @author User
+ *
+ */
 public interface LoadService {
-
-	public Load getById(Long id);
+	/**
+	 * Get by id.
+	 * @param id 
+	 * @return load.
+	 */
+	Load getById(Long id);
 	
-	public List<Load> getAllLoads();
+	/**
+	 * Get all.
+	 * @return all loads.
+	 */
+	List<Load> getAllLoads();
 	
-	public void addLoad(Load load);
+	/**
+	 * Save new.
+	 * @param load  
+	 */
+	void addLoad(Load load);
 }

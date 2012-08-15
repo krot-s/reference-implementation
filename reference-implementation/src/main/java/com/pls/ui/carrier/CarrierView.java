@@ -2,9 +2,12 @@ package com.pls.ui.carrier;
 
 import java.io.Serializable;
 
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
-import com.google.inject.Inject;
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+
+import org.vaadin.virkki.cdiutils.application.VaadinContext.VaadinScoped;
+import org.vaadin.virkki.cdiutils.application.VaadinContext.VaadinScoped.VaadinScope;
+
 import com.pls.domain.Carrier;
 import com.pls.service.CarrierService;
 import com.pls.ui.components.CustomFormFieldFactory;
@@ -25,6 +28,12 @@ import com.vaadin.ui.VerticalLayout;
 import de.steinwedel.vaadin.MessageBox;
 import de.steinwedel.vaadin.MessageBox.ButtonType;
 
+/**
+ * View for carriers screen.
+ * @author User
+ *
+ */
+@VaadinScoped(VaadinScope.APPLICATION)
 public class CarrierView implements Serializable {
 	private static final long serialVersionUID = -7921194304196825064L;
 
@@ -36,19 +45,20 @@ public class CarrierView implements Serializable {
 	
 	@Inject
 	private HeaderStrip hearder;
-
-	@Inject
-	public CarrierView(EventBus eventBus) {
-		eventBus.register(this);
-	}
 	
-	@Subscribe
-	public void showView(CarriersViewShowEvent event){
+	/**
+	 * Show this view.
+	 * @param event 
+	 */
+	public void showView(@Observes CarriersViewShowEvent event) {
 		initLayout();
 	}
 	
+	/**
+	 * Init layout.
+	 */
 	@SuppressWarnings("serial")
-	private void initLayout(){
+	private void initLayout() {
 		VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(true);
 		layout.setSpacing(true);
@@ -70,12 +80,13 @@ public class CarrierView implements Serializable {
 			public void buttonClick(ClickEvent event) {	
 				try {
                     form.validate();
-    				service.addCarrier((Carrier)form.getData());
+					service.addCarrier((Carrier) form.getData());
     				setDataSource(form);
     				beans.addAll(service.getAllCarriers());		
                 } catch (InvalidValueException e) {
                 	MessageBox mb = new MessageBox(application.getMainWindow(), "Error", MessageBox.Icon.ERROR, 
-                			"Please correct form errors and try again", new MessageBox.ButtonConfig(ButtonType.OK, "Ok"));
+                			"Please correct form errors and try again", 
+                			new MessageBox.ButtonConfig(ButtonType.OK, "Ok"));
 					mb.show();
                 }		
 			}
@@ -91,14 +102,23 @@ public class CarrierView implements Serializable {
 		application.getMainWindow().setContent(layout);
 	}
 	
-	private void setDataSource(Form form){
+	/**
+	 * Set datasource for form.
+	 * @param form 
+	 */
+	private void setDataSource(Form form) {
 		Carrier carrier = new Carrier();
 		form.setData(carrier);
 		form.setFormFieldFactory(new CustomFormFieldFactory());
 		form.setItemDataSource(new BeanItem<Carrier>(carrier));		
 	}
 	
-	private Table createTable(BeanContainer<Long, Carrier> beans){
+	/**
+	 * Create table for beans.
+	 * @param beans 
+	 * @return new table instance.
+	 */
+	private Table createTable(BeanContainer<Long, Carrier> beans) {
 		final Table table = new Table();
 		table.setWidth("100%");
 		table.setDebugId("CarrierView.initLayout.table");

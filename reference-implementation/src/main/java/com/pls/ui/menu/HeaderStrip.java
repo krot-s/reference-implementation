@@ -1,7 +1,11 @@
 package com.pls.ui.menu;
 
-import com.google.common.eventbus.EventBus;
-import com.google.inject.Inject;
+import javax.enterprise.inject.Any;
+import javax.inject.Inject;
+
+import org.vaadin.virkki.cdiutils.application.VaadinContext.VaadinScoped;
+import org.vaadin.virkki.cdiutils.application.VaadinContext.VaadinScoped.VaadinScope;
+
 import com.pls.ui.PlsApplication;
 import com.pls.ui.carrier.CarriersViewShowEvent;
 import com.pls.ui.customer.CustomerViewShowEvent;
@@ -12,16 +16,36 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 
-@SuppressWarnings("serial")
+/**
+ * Application header (with menu).
+ * 
+ * @author User
+ *
+ */
+@VaadinScoped(VaadinScope.APPLICATION)
 public class HeaderStrip extends CustomComponent {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private PlsApplication application;
-
-	@Inject
-	private EventBus eventBus;
-
+	
+	@Inject @Any 
+	private javax.enterprise.event.Event<CustomerViewShowEvent> customersViewEvent;
+	
+	@Inject @Any 
+	private javax.enterprise.event.Event<CarriersViewShowEvent> carriersViewEvent;
+	
+	@Inject @Any 
+	private javax.enterprise.event.Event<LoadViewShowEvent> loadsViewEvent;
+	
+	@Inject @Any 
+	private javax.enterprise.event.Event<UserViewShowEvent> usersViewEvent;
+	
+	/**
+	 * Create new header. 
+	 * @param mainMenu 
+	 */
+	@SuppressWarnings("serial")
 	@Inject
 	public HeaderStrip(MainMenu mainMenu) {
 		HorizontalLayout layout = new HorizontalLayout();
@@ -40,28 +64,28 @@ public class HeaderStrip extends CustomComponent {
 		layout.addComponent(new Button("Carriers", new Button.ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
-				eventBus.post(new CarriersViewShowEvent());
+				carriersViewEvent.fire(new CarriersViewShowEvent());
 			}
 		}));
 
 		layout.addComponent(new Button("Customers", new Button.ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
-				eventBus.post(new CustomerViewShowEvent());
+				customersViewEvent.fire(new CustomerViewShowEvent());
 			}
 		}));
 
 		layout.addComponent(new Button("Users", new Button.ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
-				eventBus.post(new UserViewShowEvent());
+				usersViewEvent.fire(new UserViewShowEvent());
 			}
 		}));
 
 		layout.addComponent(new Button("Logout", new Button.ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
-				eventBus.post(new LoadViewShowEvent());
+				application.closeApplication();
 			}
 		}));
 

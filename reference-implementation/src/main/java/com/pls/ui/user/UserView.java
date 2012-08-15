@@ -1,12 +1,13 @@
 package com.pls.ui.user;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import java.io.Serializable;
 
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
-import com.google.inject.Inject;
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+
+import org.vaadin.virkki.cdiutils.application.VaadinContext.VaadinScoped;
+import org.vaadin.virkki.cdiutils.application.VaadinContext.VaadinScoped.VaadinScope;
+
 import com.pls.domain.User;
 import com.pls.service.UserService;
 import com.pls.ui.components.CustomFormFieldFactory;
@@ -30,32 +31,35 @@ import com.vaadin.ui.VerticalLayout;
 import de.steinwedel.vaadin.MessageBox;
 import de.steinwedel.vaadin.MessageBox.ButtonType;
 
-public class UserView {
+/**
+ * View for users screen. 
+ * @author User
+ *
+ */
+@VaadinScoped(VaadinScope.APPLICATION)
+public class UserView implements Serializable {
 	private static final long serialVersionUID = -7921194304196825061L;
 
 	@Inject
 	private Application application;
 
+	@Inject
 	private UserService service;
 
 	@Inject
 	private HeaderStrip hearder;
 
-	@Inject
-	public UserView(EventBus eventBus) throws NamingException {
-		Context initialContext = new InitialContext();
-	    service = (UserService)initialContext.lookup("java:module/UserServiceImpl!com.pls.service.UserService");  
-		
-		eventBus.register(this);
-		
-		
-	}
-
-	@Subscribe
-	public void showView(UserViewShowEvent event) {
+	/**
+	 * Show view.
+	 * @param event 
+	 */
+	public void showView(@Observes UserViewShowEvent event) {
 		initLayout();
 	}
 
+	/**
+	 * Init layout. 
+	 */
 	@SuppressWarnings("serial")
 	private void initLayout() {
 		VerticalLayout layout = new VerticalLayout();
@@ -135,13 +139,22 @@ public class UserView {
 		application.getMainWindow().setContent(layout);
 	}
 
+	/**
+	 * Set datasource for form. 
+	 * @param form 
+	 */
 	private void setDataSource(Form form) {
 		User user = new User();
 		form.setData(user);
 		form.setFormFieldFactory(new CustomFormFieldFactory());
 		form.setItemDataSource(new BeanItem<User>(user));
 	}
-
+	
+	/**
+	 * Create new table for beans.
+	 * @param beans 
+	 * @return new table instance.
+	 */
 	private Table createTable(BeanContainer<Long, User> beans) {
 		final Table table = new Table();
 		table.setWidth("100%");

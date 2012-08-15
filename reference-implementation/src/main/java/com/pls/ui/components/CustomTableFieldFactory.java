@@ -23,6 +23,12 @@ import com.vaadin.ui.Select;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
 
+/**
+ * Custom factory for fields.
+ * @author User
+ *
+ * @param <T> 
+ */
 public class CustomTableFieldFactory<T> extends DefaultFieldFactory {
 	private static final long serialVersionUID = 1L;
 
@@ -31,6 +37,10 @@ public class CustomTableFieldFactory<T> extends DefaultFieldFactory {
 	
 	private final Class<T> clazz;
 
+	/**
+	 * Create new factory. 
+	 * @param clazz 
+	 */
 	public CustomTableFieldFactory(Class<T> clazz) {
 		this.clazz = clazz;
 	}
@@ -38,11 +48,18 @@ public class CustomTableFieldFactory<T> extends DefaultFieldFactory {
 	private CustomerService customerService;
 	private CarrierService carrierService;
 	
-	
+	/**
+	 * Create new factory. 
+	 */
 	public CustomTableFieldFactory() {
 		clazz = null;
 	}
 	
+	/**
+	 * Create new factory. 
+	 * @param carrierService 
+	 * @param customerService 
+	 */
 	public CustomTableFieldFactory(CarrierService carrierService, CustomerService customerService) {
 		clazz = null;
 		this.carrierService = carrierService;
@@ -61,9 +78,10 @@ public class CustomTableFieldFactory<T> extends DefaultFieldFactory {
 				propertyId);
 		Class<?> type = containerProperty.getType();
 
-		if (type.equals(String.class) || type.equals(Long.class) || type.equals(BigDecimal.class) || type.equals(Integer.class)) {
+		if (type.equals(String.class) || type.equals(Long.class) 
+				|| type.equals(BigDecimal.class) || type.equals(Integer.class)) {
 			final TextField tf = new TextField();
-			if(clazz != null){
+			if (clazz != null) {
 				tf.addValidator(new BeanValidationValidator(clazz, propertyId.toString()));
 			}
 			tf.setImmediate(true);
@@ -82,8 +100,9 @@ public class CustomTableFieldFactory<T> extends DefaultFieldFactory {
 				public void focus(FocusEvent event) {
 					// Make the entire item editable
 					HashMap<Object, Field> itemMap = fields.get(itemId);
-					for (Field f : itemMap.values())
+					for (Field f : itemMap.values()) {
 						f.setReadOnly(false);
+					}
 
 					Table table = (Table) uiContext;
 					table.select(itemId);
@@ -93,8 +112,9 @@ public class CustomTableFieldFactory<T> extends DefaultFieldFactory {
 				public void blur(BlurEvent event) {
 					// Make the entire item read-only
 					HashMap<Object, Field> itemMap = fields.get(itemId);
-					for (Field f : itemMap.values())
+					for (Field f : itemMap.values()) {
 						f.setReadOnly(true);
+					}
 				}
 			});
 
@@ -147,6 +167,14 @@ public class CustomTableFieldFactory<T> extends DefaultFieldFactory {
 		return super.createField(container, itemId, propertyId, uiContext);
 	}
 	
+	/**
+	 * Dummy comment. 
+	 * @param container 
+	 * @param itemId 
+	 * @param propertyId 
+	 * @param uiContext 
+	 * @return new field.
+	 */
 	@SuppressWarnings("serial")
 	private Field createCarrierField(final Container container, final Object itemId,
 			Object propertyId, final Component uiContext) {
@@ -179,8 +207,9 @@ public class CustomTableFieldFactory<T> extends DefaultFieldFactory {
 			@Override
 			public void focus(FocusEvent event) {
 				HashMap<Object, Field> itemMap = fields.get(itemId);
-				for (Field f : itemMap.values())
+				for (Field f : itemMap.values()) {
 					f.setReadOnly(false);
+				}
 
 				Table table = (Table) uiContext;
 				table.select(itemId);
@@ -192,8 +221,9 @@ public class CustomTableFieldFactory<T> extends DefaultFieldFactory {
 			@Override
 			public void blur(BlurEvent event) {
 				HashMap<Object, Field> itemMap = fields.get(itemId);
-				for (Field f : itemMap.values())
+				for (Field f : itemMap.values()) {
 					f.setReadOnly(true);
+				}
 			}
 		});
 

@@ -8,6 +8,12 @@ import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Select;
 
+/**
+ * Custom factory for fields.
+ * 
+ * @author User
+ *
+ */
 public class CustomFormFieldFactory extends DefaultFieldFactory {
 
 	private static final long serialVersionUID = -946527409294078339L;

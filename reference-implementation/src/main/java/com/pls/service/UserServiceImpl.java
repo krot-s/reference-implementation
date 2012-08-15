@@ -1,14 +1,11 @@
 package com.pls.service;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 
 import com.pls.domain.User;
@@ -22,17 +19,20 @@ import com.pls.persistance.PersistanceUtils;
  */
 @Stateless
 public class UserServiceImpl implements UserService {
-	private static final long serialVersionUID = 1L;
 	private static final int MAX_RESULTS_PER_PAGE = 10;
-	
+	private static final int MAGIC_NUMBER = 50;
+
 	@Inject
 	private EntityManager em;
-	
+
 	private final List<User> users;
 
+	/**
+	 * Default constructor.
+	 */
 	public UserServiceImpl() {
-		users = new Vector<User>(50);
-		for (long i = 0; i < 50; i++) {
+		users = new Vector<User>(MAGIC_NUMBER);
+		for (long i = 0; i < MAGIC_NUMBER; i++) {
 			users.add(createUser(i));
 		}
 	}
@@ -57,17 +57,22 @@ public class UserServiceImpl implements UserService {
 		users.add(user);
 	}
 
+	/**
+	 * New instance.
+	 * @param id 
+	 * @return new instance.
+	 */
 	private static User createUser(Long id) {
 		User user = new User();
 		user.setPersonId(id);
-		user.setCreatedBy((long)0);
+		user.setCreatedBy((long) 0);
 		user.setDateCreated(new Date());
 		user.setDateModified(new Date());
 		user.setEmailAddress("mail@gmail.com");
 		user.setFirstName("Alex");
 		user.setLastName("Dos");
-		user.setModifiedBy((long)0);
-		user.setPassword( "*********");
+		user.setModifiedBy((long) 0);
+		user.setPassword("*********");
 		user.setStatus("off");
 		return user;
 	}
@@ -78,15 +83,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * Save user.
-	 * 
-	 * @param user 
-	 */
-	public void save(User user) {
-		em.persist(user);
-	}
-
-	/**
 	 * Search users by userId.
 	 * 
 	 * @param userId 
@@ -94,10 +90,10 @@ public class UserServiceImpl implements UserService {
 	 * @return users.
 	 */
 	public List<User> searchUsers(String userId) {
-		return  PersistanceUtils.cacheQuery(
-			em.createNamedQuery("User.searchByUserId", User.class)
-			.setParameter("userId", userId)
-		).setMaxResults(MAX_RESULTS_PER_PAGE)
-		.getResultList();	
+		return PersistanceUtils.cacheQuery(
+					em.createNamedQuery("User.searchByUserId", User.class)
+					.setParameter("userId", userId))
+					.setMaxResults(MAX_RESULTS_PER_PAGE
+				).getResultList();
 	}
 }

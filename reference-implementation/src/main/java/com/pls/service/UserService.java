@@ -3,14 +3,35 @@ package com.pls.service;
 import java.util.List;
 import com.pls.domain.User;
 
+/**
+ * User service.
+ * @author User
+ *
+ */
 public interface UserService {
+	/**
+	 * Get by id.
+	 * @param id 
+	 * @return user.
+	 */
+	User getById(User id);
 
-	public User getById(User id);
+	/**
+	 * Get all.
+	 * @return all users.
+	 */
+	List<User> getAllUsers();
 
-	public List<User> getAllUsers();
-
-	public void addUser(User user);
+	/**
+	 * Save new.
+	 * @param user 
+	 */
+	void addUser(User user);
 	
-	public List<User> search(String str);
-
+	/**
+	 * Search by userId.
+	 * @param userId 
+	 * @return users
+	 */
+	List<User> search(String userId);
 }

@@ -1,54 +1,50 @@
 package com.pls.ui;
 
-import javax.servlet.http.HttpSession;
+import javax.enterprise.event.Event;
+import javax.enterprise.inject.Any;
+import javax.inject.Inject;
+import javax.servlet.annotation.WebServlet;
 
-import com.google.common.eventbus.EventBus;
-import com.google.inject.Inject;
-import com.pls.ui.carrier.CarrierView;
-import com.pls.ui.carrier.CarriersViewShowEvent;
-import com.pls.ui.customer.CustomerView;
-import com.pls.ui.load.LoadView;
-import com.pls.ui.user.UserView;
+import org.vaadin.virkki.cdiutils.application.AbstractCdiApplication;
+import org.vaadin.virkki.cdiutils.application.AbstractCdiApplicationServlet;
+import org.vaadin.virkki.cdiutils.application.AbstractCdiApplicationServlet.ApplicationClass;
+
+import com.pls.ui.user.UserViewShowEvent;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
 
-
-public class PlsApplication extends com.vaadin.Application{
+/**
+ * Application entry point.
+ * 
+ * @author User
+ *
+ */
+public class PlsApplication extends AbstractCdiApplication {
 	private static final long serialVersionUID = 1L;
 	
-	@Inject
-	private EventBus eventBus;
-	
-	@Inject
-	private HttpSession session;
-	
 	/**
-	 * Next views are injected here in order to initialize them at the same time Application
-	 * is initialized. This is becase they register themselves in EventBus.
-	 * This is dirty hack. MVP usage in real project with remove this hack as it will be 
-	 * nnecessary. 
-	 * Do not remove these injections, otherwise application will stop working  
+	 * Class used to map URL to servlet.
+	 * @author User
+	 *
 	 */
-	@Inject
-	private CarrierView carrierView;
+	@SuppressWarnings("serial")
+	@WebServlet(urlPatterns = "/*")
+    @ApplicationClass(PlsApplication.class)
+    public static class ApplicationServlet extends AbstractCdiApplicationServlet {
+	}
+	
+	@Inject @Any 
+	private Event<UserViewShowEvent> event;
 
-	@Inject
-	private CustomerView customerView;
-	
-	@Inject
-	private LoadView loadView;
-	
-	@Inject
-	private UserView userView;
-	
-	
 	@Override
 	public void init() {
 		initMainWindow();		
-		eventBus.post(new CarriersViewShowEvent());
 	}
 	
-	private void initMainWindow(){
+	/**
+	 * Init main window.
+	 */
+	private void initMainWindow() {
 		setTheme("runo");
 		setMainWindow(new Window("Vaadin Application"));		
 		getMainWindow().addListener(new Window.CloseListener() {
@@ -60,10 +56,15 @@ public class PlsApplication extends com.vaadin.Application{
 			}
 		});
 		setLogoutURL("/");
+		
+		event.fire(new UserViewShowEvent());
 	}
 	
-	public void closeApplication(){
-		session.invalidate();
+	/**
+	 * Close application instance and logout.
+	 */
+	public void closeApplication() {
+//		session.invalidate();
 		close();
 	}
 }

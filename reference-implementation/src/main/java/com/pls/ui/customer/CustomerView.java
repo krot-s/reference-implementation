@@ -2,9 +2,12 @@ package com.pls.ui.customer;
 
 import java.io.Serializable;
 
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
-import com.google.inject.Inject;
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+
+import org.vaadin.virkki.cdiutils.application.VaadinContext.VaadinScoped;
+import org.vaadin.virkki.cdiutils.application.VaadinContext.VaadinScoped.VaadinScope;
+
 import com.pls.domain.Customer;
 import com.pls.service.CustomerService;
 import com.pls.ui.components.CustomFormFieldFactory;
@@ -25,6 +28,12 @@ import com.vaadin.ui.VerticalLayout;
 import de.steinwedel.vaadin.MessageBox;
 import de.steinwedel.vaadin.MessageBox.ButtonType;
 
+/**
+ * View for customers screen.
+ * @author User
+ *
+ */
+@VaadinScoped(VaadinScope.APPLICATION)
 public class CustomerView implements Serializable {
 	private static final long serialVersionUID = -7921194304196825064L;
 
@@ -37,18 +46,19 @@ public class CustomerView implements Serializable {
 	@Inject
 	private HeaderStrip hearder;
 
-	@Inject
-	public CustomerView(EventBus eventBus) {
-		eventBus.register(this);
-	}
-	
-	@Subscribe
-	public void showView(CustomerViewShowEvent event){
+	/**
+	 * Show this view.
+	 * @param event 
+	 */
+	public void showView(@Observes CustomerViewShowEvent event) {
 		initLayout();
 	}
 	
+	/**
+	 * Init layout.
+	 */
 	@SuppressWarnings("serial")
-	private void initLayout(){
+	private void initLayout() {
 		VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(true);
 		layout.setSpacing(true);
@@ -69,12 +79,13 @@ public class CustomerView implements Serializable {
 			public void buttonClick(ClickEvent event) {						
 				try {
                     form.validate();
-    				service.addCustomer((Customer)form.getData());
+					service.addCustomer((Customer) form.getData());
     				setDataSource(form);
     				beans.addAll(service.getAllCustomers());		
                 } catch (InvalidValueException e) {
                 	MessageBox mb = new MessageBox(application.getMainWindow(), "Error", MessageBox.Icon.ERROR, 
-                				"Please correct form errors and try again", new MessageBox.ButtonConfig(ButtonType.OK, "Ok"));
+                				"Please correct form errors and try again", 
+                				new MessageBox.ButtonConfig(ButtonType.OK, "Ok"));
 					mb.show();
                 }				
 			}
@@ -89,13 +100,23 @@ public class CustomerView implements Serializable {
 		application.getMainWindow().setContent(layout);
 	}
 	
-	private void setDataSource(Form form){
+	/**
+	 * Set form datasource. 
+	 * @param form 
+	 */
+	private void setDataSource(Form form) {
 		Customer customer = new Customer();
 		form.setData(customer);
 		form.setFormFieldFactory(new CustomFormFieldFactory());
 		form.setItemDataSource(new BeanItem<Customer>(customer));		
 	}	
-	private Table createTable(BeanContainer<Long, Customer> beans){
+	
+	/**
+	 * Create new table for beans. 
+	 * @param beans 
+	 * @return new table instance.
+	 */
+	private Table createTable(BeanContainer<Long, Customer> beans) {
 		final Table table = new Table();		
 		table.setWidth("100%");
 		table.setDebugId("CarrierView.initLayout.table");

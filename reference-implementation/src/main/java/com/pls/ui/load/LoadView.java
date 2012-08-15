@@ -2,9 +2,12 @@ package com.pls.ui.load;
 
 import java.io.Serializable;
 
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
-import com.google.inject.Inject;
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+
+import org.vaadin.virkki.cdiutils.application.VaadinContext.VaadinScoped;
+import org.vaadin.virkki.cdiutils.application.VaadinContext.VaadinScoped.VaadinScope;
+
 import com.pls.domain.Load;
 import com.pls.service.CarrierService;
 import com.pls.service.CustomerService;
@@ -15,13 +18,20 @@ import com.vaadin.Application;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Button.ClickEvent;
 
+/**
+ * View for loads screen.
+ * 
+ * @author User
+ *
+ */
+@VaadinScoped(VaadinScope.APPLICATION)
 public class LoadView implements Serializable {
 
 	private static final long serialVersionUID = -1015803303420813251L;
@@ -41,16 +51,17 @@ public class LoadView implements Serializable {
 	@Inject
 	private HeaderStrip header;
 	
-	@Inject
-	public LoadView(EventBus eventBus) {
-		eventBus.register(this);
-	}
-	
-	@Subscribe
-	public void showView(LoadViewShowEvent event) {
+	/**
+	 * Show view.
+	 * @param event 
+	 */
+	public void showView(@Observes LoadViewShowEvent event) {
 		initLayout();
 	}
 	
+	/**
+	 * Init layout. 
+	 */
 	private void initLayout() {
 		VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(true);
@@ -71,7 +82,7 @@ public class LoadView implements Serializable {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
-				service.addLoad((Load)form.getData());
+				service.addLoad((Load) form.getData());
 				setDataSource(form);
 				beans.addAll(service.getAllLoads());
 			}
@@ -87,13 +98,22 @@ public class LoadView implements Serializable {
 		application.getMainWindow().setContent(layout);
 	}
 	
+	/**
+	 * Set datasource for form. 
+	 * @param form 
+	 */
 	private void setDataSource(Form form) {
 		Load load = new Load();
 		form.setData(load);
 		form.setItemDataSource(new BeanItem<Load>(load));
 	}
 	
-	private Table createTable(BeanContainer<Long, Load> beans){
+	/**
+	 * Create new table for beans. 
+	 * @param beans 
+	 * @return new table instance. 
+	 */
+	private Table createTable(BeanContainer<Long, Load> beans) {
 		final Table table = new Table();		
 		table.setWidth("100%");
 		table.setDebugId("LoadView.initLayout.table");
