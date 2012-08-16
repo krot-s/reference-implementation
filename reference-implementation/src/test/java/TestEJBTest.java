@@ -14,5 +14,6 @@ public class TestEJBTest {
 	 */
 	@Test
 	public void failingTest() {
+		Assert.assertEquals(1L, 2L);
 	}
 }
