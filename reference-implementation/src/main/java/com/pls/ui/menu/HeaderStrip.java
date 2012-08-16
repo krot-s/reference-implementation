@@ -52,7 +52,7 @@ public class HeaderStrip extends CustomComponent {
 		layout.setSpacing(true);
 		layout.addComponent(mainMenu);
 
-		layout.addComponent(new Button("Financial Dashboard",
+		layout.addComponent(new Button("Financial Dashboard 2",
 				new Button.ClickListener() {
 					@Override
 					public void buttonClick(ClickEvent event) {
