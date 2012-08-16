@@ -25,8 +25,6 @@ import javax.persistence.PersistenceContext;
  * context, to CDI beans.
  */
 public class Resources {
-	public static int violation = 0;
-	
 	@Produces
 	@PersistenceContext(unitName = "plspro")
 	private EntityManager em;
