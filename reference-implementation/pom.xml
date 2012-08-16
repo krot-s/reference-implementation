@@ -45,6 +45,7 @@
 		<!-- jboss instances -->
 		<jboss.host>localhost</jboss.host>
 		<jboss.port>9999</jboss.port>
+		<jboss.deployment.context>head</jboss.deployment.context>
 	</properties>
 
 	<build>
@@ -109,7 +110,7 @@
 						<deployables>
 							<deployable>
 								<properties>
-									<context>refimpl</context>
+									<context>${jboss.deployment.context}</context>
 								</properties>
 							</deployable>
 						</deployables>
