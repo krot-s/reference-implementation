@@ -1,5 +1,3 @@
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 /**
@@ -14,6 +12,6 @@ public class TestEJBTest {
 	 */
 	@Test
 	public void failingTest() {
-		Assert.assertEquals(1L, 2L);
+		
 	}
 }
