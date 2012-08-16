@@ -70,15 +70,7 @@
 				<!-- uncomment if you want to enable checks on each compile and fail 
 					build if some violations are present <executions> <execution> <id>compile-check</id> 
 					<goals> <goal>check</goal> </goals> <phase>compile</phase> </execution> </executions> -->
-			</plugin>
-			<plugin>
-				<groupId>org.jboss.as.plugins</groupId>
-				<artifactId>jboss-as-maven-plugin</artifactId>
-				<version>${jboss-deployer.version}</version>
-				<configuration>
-					<ignoreMissingDeployment>true</ignoreMissingDeployment>					
-				</configuration>
-			</plugin>
+			</plugin>			
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
