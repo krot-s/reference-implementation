@@ -76,7 +76,7 @@
 				<artifactId>jboss-as-maven-plugin</artifactId>
 				<version>${jboss-deployer.version}</version>
 				<configuration>
-					<ignoreMissingDeployment>true</ignoreMissingDeployment>
+					<ignoreMissingDeployment>true</ignoreMissingDeployment>					
 				</configuration>
 			</plugin>
 
@@ -203,11 +203,6 @@
 					<artifactId>vaadin</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.vaadin.addons</groupId>
