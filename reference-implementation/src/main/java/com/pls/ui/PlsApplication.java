@@ -9,6 +9,7 @@ import org.vaadin.virkki.cdiutils.application.AbstractCdiApplication;
 import org.vaadin.virkki.cdiutils.application.AbstractCdiApplicationServlet;
 import org.vaadin.virkki.cdiutils.application.AbstractCdiApplicationServlet.ApplicationClass;
 
+import com.pls.scheduler.ShedulerExample;
 import com.pls.ui.user.UserViewShowEvent;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
@@ -35,6 +36,12 @@ public class PlsApplication extends AbstractCdiApplication {
 	
 	@Inject @Any 
 	private Event<UserViewShowEvent> event;
+	
+	/**
+	 * TODO: remove this. This is for demonstration purpose only.
+	 */
+	@Inject
+	private ShedulerExample e;
 
 	@Override
 	public void init() {
@@ -45,6 +52,8 @@ public class PlsApplication extends AbstractCdiApplication {
 	 * Init main window.
 	 */
 	private void initMainWindow() {
+		e.run();
+		
 		setTheme("runo");
 		setMainWindow(new Window("Vaadin Application"));		
 		getMainWindow().addListener(new Window.CloseListener() {

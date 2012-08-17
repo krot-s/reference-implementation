@@ -31,6 +31,7 @@
 		<jpa-api.version>1.0.1.Final</jpa-api.version>
 		<junit.version>4.8.1</junit.version>
 		<cargo.version>1.1.4</cargo.version>
+		<quartz.version>2.1.5</quartz.version>
 
 		<!-- dependancies for vaadin -->
 		<vaadin.version>6.8.1</vaadin.version>
@@ -171,6 +172,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${quartz.version}</version>
 		</dependency>
 
 		<!-- vaadin dependencies start -->
