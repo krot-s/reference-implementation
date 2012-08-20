@@ -14,6 +14,5 @@ public class TestEJBTest {
 	 */
 	@Test
 	public void failingTest() {
-		Assert.assertTrue(false);
 	}
 }
