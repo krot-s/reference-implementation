@@ -46,6 +46,9 @@
 		<apache-pio.version>3.8</apache-pio.version>
 		<vaadin-cdi-utils.version>0.9.9</vaadin-cdi-utils.version>
 
+		<!-- dependencies for JBoss security -->
+		<jboss-security.version>3.2.3</jboss-security.version>
+
 		<!-- jboss instances -->
 		<jboss.host>localhost</jboss.host>
 		<jboss.port>9999</jboss.port>
@@ -366,6 +369,21 @@
 		</dependency>
 
 		<!-- vaadin dependencies end -->
+		
+		<!-- JBoss security -->
+		<dependency>
+      		<groupId>jboss</groupId>
+      		<artifactId>jbosssx</artifactId>
+      		<version>${jboss-security.version}</version>
+      		<scope>provided</scope>
+  		</dependency>
+  		<dependency>
+      		<groupId>jboss</groupId>
+      		<artifactId>jboss-jaas</artifactId>
+      		<version>${jboss-security.version}</version>
+      		<scope>provided</scope>
+  		</dependency>
+  		<!-- JBoss security end -->
 
 	</dependencies>
 </project>
