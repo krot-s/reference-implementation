@@ -40,6 +40,7 @@
 		<commons-io.version>2.4</commons-io.version>
 		<apache-pio.version>3.8</apache-pio.version>
 		<vaadin-cdi-utils.version>0.9.9</vaadin-cdi-utils.version>
+		<jboss-sequrity.version>3.2.3</jboss-sequrity.version>
 	</properties>
 
 	<build>
@@ -201,8 +202,22 @@
 			<artifactId>gwt-user</artifactId>
 			<version>2.3.0</version>
 		</dependency>
-
 		<!-- vaadin dependencies end -->
+		
+		<!-- JBoss sequrity -->
+		<dependency>
+      		<groupId>jboss</groupId>
+      		<artifactId>jbosssx</artifactId>
+      		<version>${jboss-sequrity.version}</version>
+      		<scope>provided</scope>
+  		</dependency>
+  		<dependency>
+      		<groupId>jboss</groupId>
+      		<artifactId>jboss-jaas</artifactId>
+      		<version>${jboss-sequrity.version}</version>
+      		<scope>provided</scope>
+  		</dependency>
+  		<!-- JBoss sequrity end -->
 
 	</dependencies>
 </project>

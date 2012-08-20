@@ -1,5 +1,6 @@
 package com.pls.ui;
 
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
@@ -22,20 +23,11 @@ import com.vaadin.ui.Window.CloseEvent;
 public class PlsApplication extends AbstractCdiApplication {
 	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * Class used to map URL to servlet.
-	 * @author User
-	 *
-	 */
-	@SuppressWarnings("serial")
-	@WebServlet(urlPatterns = "/*")
-    @ApplicationClass(PlsApplication.class)
-    public static class ApplicationServlet extends AbstractCdiApplicationServlet {
-	}
-	
 	@Inject @Any 
 	private Event<UserViewShowEvent> event;
 
+	private String userRole;
+	
 	@Override
 	public void init() {
 		initMainWindow();		
@@ -55,7 +47,7 @@ public class PlsApplication extends AbstractCdiApplication {
 				closeApplication();
 			}
 		});
-		setLogoutURL("/");
+//		setLogoutURL("/");
 		
 		event.fire(new UserViewShowEvent());
 	}
@@ -66,5 +58,9 @@ public class PlsApplication extends AbstractCdiApplication {
 	public void closeApplication() {
 //		session.invalidate();
 		close();
+	}
+	
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 }
