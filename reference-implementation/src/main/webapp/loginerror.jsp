@@ -7,7 +7,7 @@
     <body>
         <h1>Login Failed!</h1>
 		<p>
-			Please <a href="login.jsp">try again</a>.
+			Please <a href="index.jsp">try again</a>.
 		</p>
     </body>
 </html>
