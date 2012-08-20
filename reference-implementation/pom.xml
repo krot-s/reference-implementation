@@ -43,6 +43,9 @@
 		<apache-pio.version>3.8</apache-pio.version>
 		<vaadin-cdi-utils.version>0.9.9</vaadin-cdi-utils.version>
 		
+		<!-- dependencies for JBoss security -->
+		<jboss-sequrity.version>3.2.3</jboss-sequrity.version>
+		
 		<!-- jboss instances -->
 		<jboss.host>localhost</jboss.host>
 		<jboss.port>9999</jboss.port>
