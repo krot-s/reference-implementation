@@ -33,7 +33,7 @@
 		<cargo.version>1.1.4</cargo.version>
 		<quartz.version>2.1.5</quartz.version>
 		<arquillian.version>1.0.2.Final</arquillian.version>
-		<liquibase.version>2.0.1</liquibase.version>
+		<liquibase.version>2.0.2</liquibase.version>
 		<dbunit-plugin.version>1.0-beta-3</dbunit-plugin.version>
 		<jboss-security.version>3.2.3</jboss-security.version>
 
@@ -117,17 +117,17 @@
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>${liquibase.version}</version>
+				<configuration>
+					<url>${db.url}</url>
+					<driver>${db.driver}</driver>
+					<username>${db.username}</username>
+					<password>${db.password}</password>
+					<changeLogFile>src/main/resources/database.xml</changeLogFile>
+					<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+				</configuration>
 				<executions>
 					<execution>
 						<phase>process-resources</phase>
-						<configuration>
-							<url>${db.url}</url>
-							<driver>${db.driver}</driver>
-							<username>${db.username}</username>
-							<password>${db.password}</password>
-							<changeLogFile>src/main/resources/database.xml</changeLogFile>
-							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-						</configuration>
 						<goals>
 							<goal>update</goal>
 						</goals>
@@ -292,7 +292,7 @@
 			<version>${arquillian.version}</version>
 			<scope>test</scope>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>org.jboss.as</groupId>
 			<artifactId>jboss-as-arquillian-container-managed</artifactId>
@@ -393,7 +393,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<id>default-test</id>
-			
+
 			<properties>
 				<!-- jboss instances -->
 				<jboss.host>localhost</jboss.host>
@@ -407,7 +407,7 @@
 				<db.password>1111</db.password>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>development</id>
 			<properties>
@@ -423,7 +423,7 @@
 				<db.password>1111</db.password>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>qa</id>
 			<properties>
@@ -439,7 +439,7 @@
 				<db.password>1111</db.password>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>regression</id>
 			<properties>
