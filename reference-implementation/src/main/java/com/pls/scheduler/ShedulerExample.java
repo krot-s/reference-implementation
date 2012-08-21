@@ -1,6 +1,5 @@
 package com.pls.scheduler;
 
-import javax.ejb.Stateless;
 
 /**
  * Scheduler example.
@@ -8,7 +7,6 @@ import javax.ejb.Stateless;
  * @author User
  *
  */
-@Stateless
 public class ShedulerExample {
 	private static final int INTERVAL = 10;
 	

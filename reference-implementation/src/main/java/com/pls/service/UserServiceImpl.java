@@ -3,8 +3,8 @@ package com.pls.service;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import com.pls.domain.User;
 import com.pls.persistance.PersistanceUtils;
@@ -19,7 +19,7 @@ import com.pls.persistance.PersistanceUtils;
 public class UserServiceImpl implements UserService {
 	private static final int MAX_RESULTS_PER_PAGE = 100;
 
-	@Inject
+	@PersistenceContext
 	private EntityManager em;
 
 	@Override

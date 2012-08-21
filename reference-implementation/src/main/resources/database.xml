@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+ 
+    <changeSet id="1" author="snorocheskiy">
+	
+		<createTable tableName="ORGANIZATION_TYPE_TEST">
+            <column name="id" type="NUMBER">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="org_type_name" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+		
+		<createTable tableName="ORGANIZATION_TEST">
+            <column name="id" type="NUMBER">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="org_name" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="org_type" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="number(1)" defaultValueNumeric="1"/>
+        </createTable>
+		
+    </changeSet>
+
+    <changeSet id="2" author="snorocheskiy">
+        <createTable tableName="LOAD_TEST">
+            <column name="id" type="NUMBER" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shipper_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="carrier_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="3" author="aarapov">
+        <createTable tableName="SECURITY_USERS_TEST">
+            <column name="USER_ID" type="NUMBER" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR2(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR2(54)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BLOCKED" type="NUMBER(1)" defaultValue="0">
+                <constraints nullable="false"/>                
+            </column>
+        </createTable>
+
+        <createTable tableName="SECURITY_ROLES_TEST">
+            <column name="ROLE_ID" type="NUMBER">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="ROLENAME" type="VARCHAR2(32)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="SECURITY_USERS_IN_ROLES_TEST">
+            <column name="USER_ID" type="NUMBER">
+                <constraints nullable="false"/>                
+            </column>
+            <column name="ROLE_ID" type="NUMBER">
+                <constraints nullable="false"/>                
+            </column>            
+        </createTable>
+        
+        <addForeignKeyConstraint constraintName="SEC_USERS_IN_ROLES_USER_FK" 
+        	referencedTableName="SECURITY_USERS" baseColumnNames="USER_ID" 
+        	baseTableName="SECURITY_USERS_IN_ROLES_TEST" referencedColumnNames="USER_ID"/>
+        
+        <addForeignKeyConstraint constraintName="SEC_USERS_IN_ROLES_ROLE_FK" 
+        	referencedTableName="SECURITY_ROLES" baseColumnNames="ROLE_ID" 
+        	baseTableName="SECURITY_USERS_IN_ROLES_TEST" referencedColumnNames="ROLE_ID"/>
+        	
+        <createSequence sequenceName="SECURITY_USERS_SEQ_TEST" incrementBy="1" startValue="1000"/>
+        <createSequence sequenceName="SECURITY_ROLES_SEQ_TEST" incrementBy="1" startValue="1000"/>
+
+    </changeSet>
+    
+    <changeSet id="4" author="vkrot">
+    	<createTable tableName="USERS_TEST">
+    		<column name="PERSON_ID" type="NUMBER">
+    			<constraints primaryKey="true"/>
+    		</column>
+    		<column name="FIRST_NAME" type="VARCHAR2(60)">
+    			<constraints nullable="false"/>
+    		</column>
+    		<column name="LAST_NAME" type="VARCHAR2(60)">
+    			<constraints nullable="false"/>
+    		</column>
+    		<column name="PASSWORD" type="VARCHAR2(60)">
+    			<constraints nullable="false"/>
+    		</column>
+    		<column name="USERID" type="VARCHAR2(60)">
+    			<constraints nullable="false"/>
+    		</column>
+    		<column name="EMAIL_ADDRESS" type="VARCHAR2(60)">
+    			<constraints nullable="false"/>
+    		</column>
+    		<column name="DATE_CREATED" type="DATE">
+    		</column>
+    		<column name="DATE_MODIFIED" type="DATE">
+    		</column>
+    		<column name="CREATED_BY" type="NUMBER">
+    		</column>
+    		<column name="MODIFIED_BY" type="NUMBER">    			
+    		</column>
+    		
+    		<column name="STATUS" type="VARCHAR2(1)" defaultValue="A">
+    			<constraints nullable="false"/>    			
+    		</column>
+    	</createTable>
+    	
+    	<createSequence sequenceName="USR_SEQ_TEST" incrementBy="1" startValue="1000"/>
+    </changeSet>
+ 
+</databaseChangeLog>

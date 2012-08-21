@@ -1,10 +1,18 @@
 <dataset>
-    <ORGANIZATION_TYPE ID="1" org_type_name="shipper" />
-    <ORGANIZATION_TYPE ID="2" org_type_name="carrier" />
+    <ORGANIZATION_TYPE_TEST ID="1" org_type_name="shipper" />
+    <ORGANIZATION_TYPE_TEST ID="2" org_type_name="carrier" />
 
-    <ORGANIZATION ID="1" org_name="AK STEEL" org_type="1" active="true" />
-    <ORGANIZATION ID="2" org_name="ANOTHER SHIPPER" org_type="1" active="true" />
-    <ORGANIZATION ID="3" org_name="Some CARRIER" org_type="2" active="true" />
+    <ORGANIZATION_TEST ID="1" org_name="AK STEEL" org_type="1" active="1" />
+    <ORGANIZATION_TEST ID="2" org_name="ANOTHER SHIPPER" org_type="1" active="1" />
+    <ORGANIZATION_TEST ID="3" org_name="Some CARRIER" org_type="2" active="1" />
 
-    <LOAD ID="1" shipper_id="1" carrier_id="3" />
+    <LOAD_TEST ID="1" shipper_id="1" carrier_id="3" />
+    
+    <SECURITY_USERS_TEST USER_ID="1" USERNAME="User" PASSWORD="123" BLOCKED="0"/>
+    <SECURITY_ROLES_TEST ROLE_ID="1" ROLENAME="USER_ROLE"/>
+    <SECURITY_USERS_IN_ROLES_TEST USER_ID="1" ROLE_ID="1"/>
+    
+    <USERS_TEST PERSON_ID="1" FIRST_NAME="user" LAST_NAME="user" PASSWORD="user" 
+    	USERID="useruser" EMAIL_ADDRESS="user@user.com" STATUS="A"/>
+    
 </dataset>

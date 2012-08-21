@@ -14,10 +14,14 @@ import org.vaadin.virkki.cdiutils.application.AbstractCdiApplicationServlet.Appl
 
 import com.pls.security.UserRoles;
 import com.pls.ui.PlsApplication;
-import com.vaadin.Application;
 
+/**
+ * Entry point for pls application.
+ * @author User
+ *
+ */
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = {"/ui/*", "/VAADIN/*"})
+@WebServlet(urlPatterns = { "/ui/*", "/VAADIN/*" })
 @ApplicationClass(PlsApplication.class)
 public class ApplicationServlet extends AbstractCdiApplicationServlet {
 

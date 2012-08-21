@@ -26,6 +26,6 @@ import javax.persistence.PersistenceContext;
  */
 public class Resources {
 	@Produces
-	@PersistenceContext(unitName = "plspro")
+	@PersistenceContext
 	private EntityManager em;
 }

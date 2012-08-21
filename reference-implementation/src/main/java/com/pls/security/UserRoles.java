@@ -1,13 +1,11 @@
 package com.pls.security;
 
+/**
+ * List of static roles.
+ * 
+ * @author User
+ *
+ */
 public enum UserRoles {
-	
-	USER_ROLE("UserRole");
-	
-	private final String roleName;
-	
-	UserRoles(String name) {
-		this.roleName = name;
-	}
-	
+	USER_ROLE;
 }

@@ -1,14 +1,10 @@
 package com.pls.ui;
 
-import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
-import javax.servlet.annotation.WebServlet;
 
 import org.vaadin.virkki.cdiutils.application.AbstractCdiApplication;
-import org.vaadin.virkki.cdiutils.application.AbstractCdiApplicationServlet;
-import org.vaadin.virkki.cdiutils.application.AbstractCdiApplicationServlet.ApplicationClass;
 
 import com.pls.ui.user.UserViewShowEvent;
 import com.vaadin.ui.Window;
@@ -26,6 +22,7 @@ public class PlsApplication extends AbstractCdiApplication {
 	@Inject @Any 
 	private Event<UserViewShowEvent> event;
 
+	@SuppressWarnings("unused")
 	private String userRole;
 	
 	@Override
@@ -60,6 +57,10 @@ public class PlsApplication extends AbstractCdiApplication {
 		close();
 	}
 	
+	/**
+	 * Set user role.
+	 * @param userRole 
+	 */
 	public void setUserRole(String userRole) {
 		this.userRole = userRole;
 	}

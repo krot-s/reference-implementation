@@ -16,8 +16,6 @@ import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.pls.scheduler.JobExample;
-
 /**
  * Update metrics statistics.
  * 
@@ -26,7 +24,7 @@ import com.pls.scheduler.JobExample;
  */
 @Stateless
 public class MetricsUpdater {
-	private static final Logger LOG = LoggerFactory.getLogger(JobExample.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MetricsUpdater.class);
 
 	private static String updateMetricsQuery;
 
