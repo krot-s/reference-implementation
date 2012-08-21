@@ -42,6 +42,4 @@
     <security-role>
         <role-name>USER_ROLE</role-name>
     </security-role>
-    
-
 </web-app>
