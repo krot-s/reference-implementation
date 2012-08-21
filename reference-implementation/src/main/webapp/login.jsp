@@ -19,5 +19,14 @@
 		<br>
 	  	<input type='submit' value='login'>
 	</form>
+	
+	<% String msg = request.getParameter("failed");
+		if (msg != null) {
+	%>
+		<p>
+		<label><font color="red">Invalid username/password, please retry again</font></label>
+	<% 
+		}
+	%>
 </body>
 </html>

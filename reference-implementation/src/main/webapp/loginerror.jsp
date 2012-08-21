@@ -5,6 +5,7 @@
         <title>Reference Implementation</title>
     </head>
     <body>
+        <% out.println("Hello World"); %>
         <h1>Login Failed!</h1>
 		<p>
 			Please <a href="index.jsp">try again</a>.

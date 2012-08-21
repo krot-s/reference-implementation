@@ -44,7 +44,7 @@
 		<vaadin-cdi-utils.version>0.9.9</vaadin-cdi-utils.version>
 		
 		<!-- dependencies for JBoss security -->
-		<jboss-sequrity.version>3.2.3</jboss-sequrity.version>
+		<jboss-security.version>3.2.3</jboss-security.version>
 		
 		<!-- jboss instances -->
 		<jboss.host>localhost</jboss.host>
@@ -240,20 +240,20 @@
 
 		<!-- vaadin dependencies end -->
 		
-		<!-- JBoss sequrity -->
+		<!-- JBoss security 
 		<dependency>
       		<groupId>jboss</groupId>
       		<artifactId>jbosssx</artifactId>
       		<version>${jboss-sequrity.version}</version>
       		<scope>provided</scope>
-  		</dependency>
+  		</dependency>-->
   		<dependency>
       		<groupId>jboss</groupId>
       		<artifactId>jboss-jaas</artifactId>
-      		<version>${jboss-sequrity.version}</version>
+      		<version>${jboss-security.version}</version>
       		<scope>provided</scope>
   		</dependency>
-  		<!-- JBoss sequrity end -->
+  		<!-- JBoss security end -->
 
 	</dependencies>
 </project>
