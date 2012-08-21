@@ -27,10 +27,10 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Cacheable
 @Entity
-@Table(name = "Users_test")
+@Table(name = "Users")
 @NamedQuery(query = "select u from User u where upper(u.userId) like :userId order by u.userId", 
 	name = "User.searchByUserId")
-@SequenceGenerator(name = "USERS_SEQ", sequenceName = "USR_SEQ_TEST")
+@SequenceGenerator(name = "USERS_SEQ", sequenceName = "USR_SEQ")
 public class User implements Serializable {
 	private static final long serialVersionUID = -2092570781115897267L;
 

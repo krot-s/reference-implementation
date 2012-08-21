@@ -6,48 +6,8 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
  
-    <changeSet id="1" author="snorocheskiy">
-	
-		<createTable tableName="ORGANIZATION_TYPE_TEST">
-            <column name="id" type="NUMBER">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="org_type_name" type="VARCHAR2(255)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-		
-		<createTable tableName="ORGANIZATION_TEST">
-            <column name="id" type="NUMBER">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="org_name" type="VARCHAR2(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="org_type" type="integer">
-                <constraints nullable="false"/>
-            </column>
-            <column name="active" type="number(1)" defaultValueNumeric="1"/>
-        </createTable>
-		
-    </changeSet>
-
-    <changeSet id="2" author="snorocheskiy">
-        <createTable tableName="LOAD_TEST">
-            <column name="id" type="NUMBER" >
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="shipper_id" type="integer">
-                <constraints nullable="false"/>
-            </column>
-            <column name="carrier_id" type="integer">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    
-    <changeSet id="3" author="aarapov">
-        <createTable tableName="SECURITY_USERS_TEST">
+    <changeSet id="1" author="aarapov">
+        <createTable tableName="SECURITY_USERS">
             <column name="USER_ID" type="NUMBER" >
                 <constraints primaryKey="true"/>
             </column>
@@ -62,7 +22,7 @@
             </column>
         </createTable>
 
-        <createTable tableName="SECURITY_ROLES_TEST">
+        <createTable tableName="SECURITY_ROLES">
             <column name="ROLE_ID" type="NUMBER">
                 <constraints primaryKey="true"/>
             </column>
@@ -71,7 +31,7 @@
             </column>
         </createTable>
         
-        <createTable tableName="SECURITY_USERS_IN_ROLES_TEST">
+        <createTable tableName="SECURITY_USERS_IN_ROLES">
             <column name="USER_ID" type="NUMBER">
                 <constraints nullable="false"/>                
             </column>
@@ -81,20 +41,20 @@
         </createTable>
         
         <addForeignKeyConstraint constraintName="SEC_USERS_IN_ROLES_USER_FK" 
-        	referencedTableName="SECURITY_USERS_TEST" baseColumnNames="USER_ID" 
-        	baseTableName="SECURITY_USERS_IN_ROLES_TEST" referencedColumnNames="USER_ID"/>
+        	referencedTableName="SECURITY_USERS" baseColumnNames="USER_ID" 
+        	baseTableName="SECURITY_USERS_IN_ROLES" referencedColumnNames="USER_ID"/>
         
         <addForeignKeyConstraint constraintName="SEC_USERS_IN_ROLES_ROLE_FK" 
-        	referencedTableName="SECURITY_ROLES_TEST" baseColumnNames="ROLE_ID" 
-        	baseTableName="SECURITY_USERS_IN_ROLES_TEST" referencedColumnNames="ROLE_ID"/>
+        	referencedTableName="SECURITY_ROLES" baseColumnNames="ROLE_ID" 
+        	baseTableName="SECURITY_USERS_IN_ROLES" referencedColumnNames="ROLE_ID"/>
         	
-        <createSequence sequenceName="SECURITY_USERS_SEQ_TEST" incrementBy="1" startValue="1000"/>
-        <createSequence sequenceName="SECURITY_ROLES_SEQ_TEST" incrementBy="1" startValue="1000"/>
+        <createSequence sequenceName="SECURITY_USERS_SEQ" incrementBy="1" startValue="1000"/>
+        <createSequence sequenceName="SECURITY_ROLES_SEQ" incrementBy="1" startValue="1000"/>
 
     </changeSet>
     
-    <changeSet id="4" author="vkrot">
-    	<createTable tableName="USERS_TEST">
+    <changeSet id="2" author="vkrot">
+    	<createTable tableName="USERS">
     		<column name="PERSON_ID" type="NUMBER">
     			<constraints primaryKey="true"/>
     		</column>
@@ -127,7 +87,7 @@
     		</column>
     	</createTable>
     	
-    	<createSequence sequenceName="USR_SEQ_TEST" incrementBy="1" startValue="1000"/>
+    	<createSequence sequenceName="USR_SEQ" incrementBy="1" startValue="1000"/>
     </changeSet>
  
 </databaseChangeLog>

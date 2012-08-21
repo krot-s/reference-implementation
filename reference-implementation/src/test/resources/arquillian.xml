@@ -7,7 +7,6 @@
 
     <container qualifier="jbossas-managed">
         <configuration>
-            <property name="jbossHome">C:\bin\jboss-as-7.1.0.Final</property>
             <property name="javaVmArguments">-Xmx512m -XX:MaxPermSize=128m -Xverify:none -XX:+UseFastAccessorMethods</property>
             <property name="outputToConsole">true</property>
         </configuration>
