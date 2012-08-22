@@ -358,7 +358,7 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<id>default-test</id>
+			<id>default</id>
 
 			<properties>
 				<!-- jboss instances -->
@@ -449,12 +449,12 @@
 		</profile>
 
 		<profile>
-			<id>development</id>
+			<id>ci-development</id>
 			<properties>
 				<!-- jboss instances -->
 				<jboss.host>localhost</jboss.host>
 				<jboss.port>9999</jboss.port>
-				<jboss.deployment.context>dev</jboss.deployment.context>
+				<jboss.deployment.context>app</jboss.deployment.context>
 
 				<!-- database connection properties -->
 				<db.url>jdbc:oracle:thin:@192.168.1.176:1521:xe</db.url>
@@ -524,12 +524,12 @@
 		</profile>
 
 		<profile>
-			<id>qa</id>
+			<id>ci-qa</id>
 			<properties>
 				<!-- jboss instances -->
 				<jboss.host>localhost</jboss.host>
 				<jboss.port>9998</jboss.port>
-				<jboss.deployment.context>qa</jboss.deployment.context>
+				<jboss.deployment.context>app</jboss.deployment.context>
 
 				<!-- database connection properties -->
 				<db.url>jdbc:oracle:thin:@192.168.1.176:1521:xe</db.url>
@@ -599,12 +599,12 @@
 		</profile>
 
 		<profile>
-			<id>regression</id>
+			<id>ci-regression</id>
 			<properties>
 				<!-- jboss instances -->
 				<jboss.host>localhost</jboss.host>
 				<jboss.port>9997</jboss.port>
-				<jboss.deployment.context>regression</jboss.deployment.context>
+				<jboss.deployment.context>app</jboss.deployment.context>
 
 				<!-- database connection properties -->
 				<db.url>jdbc:oracle:thin:@192.168.1.176:1521:xe</db.url>
