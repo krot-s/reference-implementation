@@ -430,7 +430,7 @@
 			<properties>
 				<!-- jboss instances -->
 				<jboss.host>localhost</jboss.host>
-				<jboss.port>9999</jboss.port>
+				<jboss.port>9998</jboss.port>
 				<jboss.deployment.context>qa</jboss.deployment.context>
 
 				<!-- database connection properties -->
@@ -446,7 +446,7 @@
 			<properties>
 				<!-- jboss instances -->
 				<jboss.host>localhost</jboss.host>
-				<jboss.port>9999</jboss.port>
+				<jboss.port>9997</jboss.port>
 				<jboss.deployment.context>regression</jboss.deployment.context>
 
 				<!-- database connection properties -->
