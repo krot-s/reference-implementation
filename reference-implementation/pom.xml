@@ -122,7 +122,7 @@
 					<driver>${db.driver}</driver>
 					<username>${db.username}</username>
 					<password>${db.password}</password>
-					<changeLogFile>src/main/resources/database.xml</changeLogFile>
+					<changeLogFile>${changeset.file}</changeLogFile>
 					<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
 				</configuration>
 				<executions>
@@ -153,7 +153,7 @@
 					<driver>${db.driver}</driver>
 					<username>${db.username}</username>
 					<password>${db.password}</password>
-					<src>${project.build.directory}/test-classes/TestDataSet.xml</src>
+					<src>${testdata.file}</src>
 					<type>CLEAN_INSERT</type>
 					<schema>${db.username}</schema>
 					<transaction>true</transaction>
@@ -175,6 +175,36 @@
 							<goal>operation</goal>
 						</goals>
 					</execution>
+				</executions>
+			</plugin>
+			
+			<!-- attach additional resources. These are used by jenkins promotion builds -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+						<execution>
+							<id>attach-artifacts</id>
+							<phase>package</phase>
+							<goals>
+								<goal>attach-artifact</goal>
+							</goals>
+							<configuration>
+								<artifacts>
+									<artifact>
+										<file>${project.basedir}/src/main/resources/database.xml</file>
+										<type>xml</type>
+										<classifier>changeset</classifier>
+									</artifact>
+									<artifact>
+										<file>${project.basedir}/src/test/resources/TestDataSet.xml</file>
+										<type>xml</type>
+										<classifier>testdataset</classifier>
+									</artifact>
+								</artifacts>
+							</configuration>
+						</execution>
 				</executions>
 			</plugin>
 		</plugins>
@@ -406,6 +436,10 @@
 				<db.driver>oracle.jdbc.OracleDriver</db.driver>
 				<db.username>test1</db.username>
 				<db.password>1111</db.password>
+				
+				<!-- resource location -->
+				<changeset.file>${project.basedir}/src/main/resources/database.xml</changeset.file>
+				<testdata.file>${project.basedir}/src/test/resources/TestDataSet.xml</testdata.file>
 			</properties>
 		</profile>
 
@@ -422,6 +456,10 @@
 				<db.driver>oracle.jdbc.OracleDriver</db.driver>
 				<db.username>test1</db.username>
 				<db.password>1111</db.password>
+
+				<!-- resource location -->
+				<changeset.file>${project.basedir}/src/main/resources/database.xml</changeset.file>
+				<testdata.file>${project.basedir}/src/test/resources/TestDataSet.xml</testdata.file>
 			</properties>
 		</profile>
 
@@ -438,6 +476,10 @@
 				<db.driver>oracle.jdbc.OracleDriver</db.driver>
 				<db.username>test2</db.username>
 				<db.password>1111</db.password>
+
+				<!-- resource location -->
+				<changeset.file>${project.basedir}/src/main/resources/database.xml</changeset.file>
+				<testdata.file>${project.basedir}/src/test/resources/TestDataSet.xml</testdata.file>
 			</properties>
 		</profile>
 
@@ -454,6 +496,10 @@
 				<db.driver>oracle.jdbc.OracleDriver</db.driver>
 				<db.username>test3</db.username>
 				<db.password>1111</db.password>
+
+				<!-- resource location -->
+				<changeset.file>${project.build.directory}/${artifactId}-${version}-changeset.xml</changeset.file>
+				<testdata.file>${project.build.directory}/${artifactId}-${version}-testdataset.xml</testdata.file>
 			</properties>
 		</profile>
 	</profiles>
