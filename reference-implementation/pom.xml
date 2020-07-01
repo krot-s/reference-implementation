@@ -31,7 +31,7 @@
 		<jpa-api.version>1.0.1.Final</jpa-api.version>
 		<junit.version>4.8.1</junit.version>
 		<cargo.version>1.1.4</cargo.version>
-		<quartz.version>2.1.5</quartz.version>
+		<quartz.version>2.3.2</quartz.version>
 		<arquillian.version>1.0.2.Final</arquillian.version>
 		<liquibase.version>2.0.2</liquibase.version>
 		<dbunit-plugin.version>1.0-beta-3</dbunit-plugin.version>
