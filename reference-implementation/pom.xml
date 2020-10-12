@@ -29,7 +29,7 @@
 		<cdi-api.version>1.1.EDR1.2</cdi-api.version>
 		<jboss-ejb-api.version>1.0.2.Final</jboss-ejb-api.version>
 		<jpa-api.version>1.0.1.Final</jpa-api.version>
-		<junit.version>4.8.1</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<cargo.version>1.1.4</cargo.version>
 		<quartz.version>2.1.5</quartz.version>
 		<arquillian.version>1.0.2.Final</arquillian.version>
