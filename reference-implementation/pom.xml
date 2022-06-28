@@ -44,7 +44,7 @@
 		<messagebox-addon.version>1.1.1</messagebox-addon.version>
 		<tableexport-addon.version>1.3.0</tableexport-addon.version>
 		<commons-io.version>2.4</commons-io.version>
-		<apache-pio.version>3.8</apache-pio.version>
+		<apache-pio.version>4.1.1</apache-pio.version>
 		<vaadin-cdi-utils.version>0.9.9</vaadin-cdi-utils.version>
 		
 		<!-- database connection properties -->
